@@ -1,0 +1,25 @@
+# Project 1 - Due Oct 10th.  
+# Brandon Reyes Parra 
+# UMID: 55887524
+
+
+import csv 
+import unittest 
+
+def csv_to_dict_list(self):
+
+# Empty list to have the data
+    data_list = []
+# Step 1: I'm opening the file. 
+    with open('SampleSuperstore.csv' 'r') as csvfile:
+    sample_superstores_reader = csv.reader(csvfile)
+
+#Step 2: Loop to get info from each row in the csv 
+
+        for row in sample_superstores_reader:
+            data_list.append(row) #Step 3: this would add the row to the list we created
+
+# Step 4: we return the function 
+
+    return data_list 
+
