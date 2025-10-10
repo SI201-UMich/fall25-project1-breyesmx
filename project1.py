@@ -23,3 +23,4 @@ def csv_to_dict_list(self):
 
     return data_list 
 
+def calcualte_total_profit_by_category(data_list):
