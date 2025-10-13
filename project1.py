@@ -26,3 +26,8 @@ def csv_to_dict_list(self):
     return data_list 
 
 def calcualte_total_profit_by_category(data_list):
+
+#Structure 
+#Item = will be furniture which is a str
+#Sales = will be the integer of the number of the sales 
+#if statement if the item got sold
