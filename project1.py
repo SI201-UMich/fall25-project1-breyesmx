@@ -1,6 +1,8 @@
 # Project 1 - Due Oct 10th.  
 # Brandon Reyes Parra 
 # UMID: 55887524
+#Copy fail to a new vs code testing the commit with this comment
+#Testing Commit 
 
 
 import csv 
