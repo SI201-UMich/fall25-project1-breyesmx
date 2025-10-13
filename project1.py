@@ -18,6 +18,8 @@ def csv_to_dict_list(self):
 #Step 2: Loop to get info from each row in the csv / Update indentions 
 
         for row in superstores_reader:
+            row["Sales"] = float(row["Sales"])
+            row["Profit"] = float(row["Profit"])
             data_list.append(row) #Step 3: this would add the row to the list we created
 
 # Step 4: we return the function / update indentions
