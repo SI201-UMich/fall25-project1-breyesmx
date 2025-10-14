@@ -7,7 +7,7 @@
 
 import csv 
 # ___read the file function___
-def csv_to_dict_list(SampleSuperstore.csv):
+def csv_to_dict_list():
 
 # Empty list to have the data
     data_list = []
@@ -31,20 +31,33 @@ print(data[0])
 
 # ___Function number 2 get the total of the profit by category__
 def calcualte_total_profit_by_category(data, category):
-    total_profit = 0 
-    for row in data: 
+#created a a variable called total_profit to start at 0.
+    total_profit = 0
+# loop trough each row from the data. 
+    for row in data:
+# Check the if the category is matches the category we are calling
         if row["Caterogy"] == category:
+# If it matches then we add to the total_profit 
             total_profit += row["Profit"]
     return total_profit
 
 # __Function 3: Get the total sales by category__
 def calculate_total_sales_by_category(data, category):
+#created a varible called total_sales which start at 0.
     total_sales = 0
-    for row in data: 
+# Loop trough each row in the data.
+    for row in data:
+#Again it checks the value in the row that matches the one we are calling. 
         if row["Category"] == category:
+#if it matches then we add to the total_sales. 
             total_sales += row["Sales"]
     return total_sales
 
+#Function number 4 get the the result of the file 
+def write_results_to_file(filename, results):
+    with open(filename, 'w' as file):
+
+#trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #Structure 
 #Item = will be furniture which is a str
 #Sales = will be the integer of the number of the sales
