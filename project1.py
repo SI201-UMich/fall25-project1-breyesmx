@@ -55,10 +55,10 @@ def calculate_total_sales_by_category(data, category):
 
 #Function number 4 get the the result of the file 
 def write_results_to_file(filename, results_dict):
-    with open(filename, 'w' newline='') as file: #error here
-    section_names = ['Category', 'Total Profit', 'Total Sales']
-    writer = csv.DictReader(csvfile), fieldnames = section_names
-    writer.writeheader()
+    with open(filename, 'w', newline='') as file: #error here AI debugg this missing comma 
+        section_names = ['Category', 'Total Profit', 'Total Sales'] #debugging with AI wrong indention
+        writer = csv.DictReader(csvfile), fieldnames = section_names #debugging with AI wrong indention
+        writer.writeheader() #debugging with AI wrong indention
 
 # Main
 def main():
