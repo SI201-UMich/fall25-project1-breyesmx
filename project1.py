@@ -58,6 +58,7 @@ def write_results_to_file(filename, results):
     with open(filename, 'w' as file):
 
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
-#Structure 
+#I was able to pull succesfully my updates from the other laptop.
+# Structure 
 #Item = will be furniture which is a str
 #Sales = will be the integer of the number of the sales
