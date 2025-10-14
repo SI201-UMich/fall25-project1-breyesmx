@@ -25,7 +25,7 @@ def csv_to_dict_list(filename):
                 data_list.append(row) #Step 3: this would add the row to the list we created
             except ValueError:
                 print(f'Skipping row that are non-numeric data: {row}')
-        return data_list
+    return data_list #AI debgging indention 
 
 # Step 4: we return the function / update indentions
 
@@ -64,7 +64,7 @@ def write_results_to_file(filename, results_dict):
 def main():
 #Using this read function #this would be in the main
     data = csv_to_dict_list("SampleSuperstore.csv")
-print(f"Load {len(data)} rows from the file.")
+    print(f"Load {len(data)} rows from the file.")
  
 # get a list of the categories 
     categories = set(row["Category"] for row in data if "Category" in row)
@@ -72,8 +72,26 @@ print(f"Load {len(data)} rows from the file.")
 # loop trough each of the category and get it's total
     final_result = []
     for category in categories:
-# call the functions for each of the category
+    profit = calcualte_total_profit_by_category(data, category)
+    sales = calculate_total_sales_by_category(data, category)
 
+# get the results in csv writer 
+    final_result.append({
+        "Category": category
+        "Total Profit": round(profit, 2),
+        "Total Sales": round(sales, 2)
+
+    })
+    print("\n Analysis Complete")
+    print(final_result)
+
+# then final list to a new file 
+    output_file = "category_summary_alternative.csv"
+    write_results_to_file(out_file, final_result)
+    print(f'\nResults have been completed to written to {output_file}')
+# call the functions for each of the category
+if __name__ == "__main__":
+    main()
     
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #I was able to pull succesfully my updates from the other laptop.
