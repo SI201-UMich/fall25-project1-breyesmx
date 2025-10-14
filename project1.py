@@ -7,12 +7,12 @@
 
 import csv 
 # ___read the file function___
-def csv_to_dict_list():
+def csv_to_dict_list(filename):
 
 # Empty list to have the data
     data_list = []
 # Step 1: I'm opening the file. / Update Indentions
-    with open('SampleSuperstore.csv' 'r') as csvfile:
+    with open(filename, 'r') as csvfile:
         superstores_reader = csv.DictReader(csvfile)
 
 #Step 2: Loop to get info from each row in the csv / Update indentions 
