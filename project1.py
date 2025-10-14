@@ -6,6 +6,7 @@
 
 
 import csv 
+
 # ___read the file function___
 def csv_to_dict_list(filename):
 
@@ -18,10 +19,14 @@ def csv_to_dict_list(filename):
 #Step 2: Loop to get info from each row in the csv / Update indentions 
 
         for row in superstores_reader:
-            row["Sales"] = float(row["Sales"])
-            row["Profit"] = float(row["Profit"])
-            data_list.append(row) #Step 3: this would add the row to the list we created
-        return data_list 
+            try:
+                row["Sales"] = float(row["Sales"])
+                row["Profit"] = float(row["Profit"])
+                data_list.append(row) #Step 3: this would add the row to the list we created
+            except ValueError:
+                print(f'Skipping row that are non-numeric data: {row}')
+        return data_list
+
 #Using this read function
 data = csv_to_dict_list("SampleSuperstore.csv")
 print(f"Load {len(data)} rows")
@@ -55,7 +60,7 @@ def calculate_total_sales_by_category(data, category):
 
 #Function number 4 get the the result of the file 
 def write_results_to_file(filename, results):
-    with open(filename, 'w' as file):
+    with open(filename, 'w' as file): #error here
 
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #I was able to pull succesfully my updates from the other laptop.
