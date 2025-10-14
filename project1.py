@@ -7,7 +7,7 @@
 
 import csv 
 
-def csv_to_dict_list(self):
+def csv_to_dict_list(SampleSuperstore.csv):
 
 # Empty list to have the data
     data_list = []
@@ -21,15 +21,22 @@ def csv_to_dict_list(self):
             row["Sales"] = float(row["Sales"])
             row["Profit"] = float(row["Profit"])
             data_list.append(row) #Step 3: this would add the row to the list we created
+        return data_list 
+#Using this read function
+data = csv_to_dict_list("SampleSuperstore.csv")
+print(f"Load {len(data)} rows")
+print(data[0])
 
 # Step 4: we return the function / update indentions
 
-        return data_list 
-
-def calcualte_total_profit_by_category(data_list):
+# Function number 2 get the total of the profit by category
+def calcualte_total_profit_by_category(data, category):
+    total_profit = 0 
+    for row in data: 
+        if row["Caterogy"] == category:
+            total_profit += row["Profit"]
+    return total_profit
 
 #Structure 
 #Item = will be furniture which is a str
-#Sales = will be the integer of the number of the sales 
-#if statement if the item got sold
-
+#Sales = will be the integer of the number of the sales
