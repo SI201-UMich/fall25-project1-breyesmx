@@ -6,7 +6,7 @@
 
 
 import csv 
-
+# ___read the file function___
 def csv_to_dict_list(SampleSuperstore.csv):
 
 # Empty list to have the data
@@ -29,13 +29,21 @@ print(data[0])
 
 # Step 4: we return the function / update indentions
 
-# Function number 2 get the total of the profit by category
+# ___Function number 2 get the total of the profit by category__
 def calcualte_total_profit_by_category(data, category):
     total_profit = 0 
     for row in data: 
         if row["Caterogy"] == category:
             total_profit += row["Profit"]
     return total_profit
+
+# __Function 3: Get the total sales by category__
+def calculate_total_sales_by_category(data, category):
+    total_sales = 0
+    for row in data: 
+        if row["Category"] == category:
+            total_sales += row["Sales"]
+    return total_sales
 
 #Structure 
 #Item = will be furniture which is a str
