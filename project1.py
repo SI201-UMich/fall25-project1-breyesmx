@@ -36,7 +36,7 @@ def calcualte_total_profit_by_category(data, category):
 # loop trough each row from the data. 
     for row in data:
 # Check the if the category is matches the category we are calling
-        if row["Caterogy"] == category:
+        if row["Category"] == category:
 # If it matches then we add to the total_profit 
             total_profit += row["Profit"]
     return total_profit
