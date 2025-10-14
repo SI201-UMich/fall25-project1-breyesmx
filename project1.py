@@ -27,11 +27,6 @@ def csv_to_dict_list(filename):
                 print(f'Skipping row that are non-numeric data: {row}')
         return data_list
 
-#Using this read function
-data = csv_to_dict_list("SampleSuperstore.csv")
-print(f"Load {len(data)} rows")
-print(data[0])
-
 # Step 4: we return the function / update indentions
 
 # ___Function number 2 get the total of the profit by category__
@@ -41,7 +36,7 @@ def calcualte_total_profit_by_category(data, category):
 # loop trough each row from the data. 
     for row in data:
 # Check the if the category is matches the category we are calling
-        if row["Category"] == category:
+        if row.get["Category"] == category: #missing the .get AI debug this code 
 # If it matches then we add to the total_profit 
             total_profit += row["Profit"]
     return total_profit
@@ -53,15 +48,33 @@ def calculate_total_sales_by_category(data, category):
 # Loop trough each row in the data.
     for row in data:
 #Again it checks the value in the row that matches the one we are calling. 
-        if row["Category"] == category:
+        if row.get["Category"] == category: #missing .get AI debugg this code 
 #if it matches then we add to the total_sales. 
             total_sales += row["Sales"]
     return total_sales
 
 #Function number 4 get the the result of the file 
-def write_results_to_file(filename, results):
-    with open(filename, 'w' as file): #error here
+def write_results_to_file(filename, results_dict):
+    with open(filename, 'w' newline='') as file: #error here
+    section_names = ['Category', 'Total Profit', 'Total Sales']
+    writer = csv.DictReader(csvfile), fieldnames = section_names
+    writer.writeheader()
 
+# Main
+def main():
+#Using this read function #this would be in the main
+    data = csv_to_dict_list("SampleSuperstore.csv")
+print(f"Load {len(data)} rows from the file.")
+ 
+# get a list of the categories 
+    categories = set(row["Category"] for row in data if "Category" in row)
+    print(F'Found categories: {list(categories)}')
+# loop trough each of the category and get it's total
+    final_result = []
+    for category in categories:
+# call the functions for each of the category
+
+    
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #I was able to pull succesfully my updates from the other laptop.
 # Structure 
