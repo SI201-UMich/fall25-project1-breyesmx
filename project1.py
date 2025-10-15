@@ -109,6 +109,19 @@ class TestSuperstoreFunctions(unittest.TestCase):
         #print(self.test_data)
 # Test for the CSV csv_to_dict_list 
 def test_csv_loads_valid_rows(self):
+    #Here I'm getting the valid rows only. The file has 10 but some of them have N/A so the're should be only 7 of them.
+    self.asserEqual(len(Self.test_data), 7)
+# Will get sales and profit to be float values
+def test_csv_converts_to_float(self):
+# Will go trough each row with NA Values that are skipped. 
+def test_csv_skips_na_values(self):
+# Test the data and check that negative profits are still added as valid numeric values
+def test_csv_empty_file(self):
+
+# Test the calculate_total_profit_by_category
+
+def test_profit_calculation_furniture(self):
+    
 
 
     
