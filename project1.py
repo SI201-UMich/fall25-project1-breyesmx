@@ -80,15 +80,18 @@ def main():
         profit = calcualte_total_profit_by_category(data, category) #debugged by AI indentions 
         sales = calculate_total_sales_by_category(data, category) #debugged by AI indentions 
 
-# get the results in csv writer
-    final_result.append({
-        "Category": category,
-        "Total Profit": round(profit, 2),
-        "Total Sales": round(sales, 2)
+# get the results in csv writer / indention wrong here would not select all the categories at first.
+        final_result.append({
+            "Category": category,
+            "Total Profit": round(profit, 2),
+            "Total Sales": round(sales, 2)
+        })
 
-    })
-    print("\n Analysis Complete")
-    print(final_result)
+    print("\nResults by Category:")
+    for result in final_result:
+        print(f"{result["Category"]}: \nProfit = ${result["Total Profit"]:,.2f}, \nSales = ${result["Total Sales"]:,.2f}")
+    print("\nAnalysis Complete:")
+    #print(final_result)
 
 # then final list to a new file 
     output_file = "category_summary.csv" 
@@ -100,6 +103,6 @@ if __name__ == "__main__":
     
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #I was able to pull succesfully my updates from the other laptop.
-# Structure 
+# Structure needs to be fixed 
 #Item = will be furniture which is a str
 #Sales = will be the integer of the number of the sales
