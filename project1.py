@@ -45,7 +45,7 @@ def calcualte_total_profit_by_category(data, category):
             total_profit += row["Profit"]
     return total_profit
 
-# __Function 3: Get the total sales by category__
+# Function 3: Get the total sales by category__
 def calculate_total_sales_by_category(data, category):
 #created a varible called total_sales which start at 0.
     total_sales = 0
@@ -110,13 +110,20 @@ class TestSuperstoreFunctions(unittest.TestCase):
 # Test for the CSV csv_to_dict_list 
 def test_csv_loads_valid_rows(self):
     #Here I'm getting the valid rows only. The file has 10 but some of them have N/A so the're should be only 7 of them.
-    self.asserEqual(len(Self.test_data), 7)
+    self.assertEqual(len(self.test_data), 7)
 # Will get sales and profit to be float values
 def test_csv_converts_to_float(self):
+    first_row = self.test_data[0]
+    self.assertIsInstance(first_row["Sales"], float)
+    self.assertIsInstance(first_row["Profit"], float)
 # Will go trough each row with NA Values that are skipped. 
 def test_csv_skips_na_values(self):
-# Test the data and check that negative profits are still added as valid numeric values
-def test_csv_empty_file(self):
+    tech_profits = [row["Profit"] for row in self.test_data if row["Category"] == "Technology"]
+    self.assertNotIn(150.00, tech_profits)
+# Test for all the negative profits if any
+def test_csv_handles_nagative_values(self):
+    negative_profit_exits = any(row["Profit"] < 0 for row in self.test_data)
+    self.assertTrue(negative_profit_exits)
 
 # Test the calculate_total_profit_by_category
 
