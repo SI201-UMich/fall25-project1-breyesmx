@@ -129,16 +129,40 @@ def test_csv_handles_nagative_values(self):
 
 # Test the profit calculation for all the furniture category: 
 def test_profit_calculation_furniture(self):
-
+    profit = calcualte_total_profit_by_category(self.test_data, "Furniture")
+    self.assertEqual(profit, 150.00)
+# test all of the categories to get numeric value
 def test_profit_calculation_all_categories(self):
-
+    categories = ["Furniture", "Technology", "Office Supplies"]
+    for category in categories:
+        profit = calcualte_total_profit_by_category(self.test_data, category)
+        self.assertIsInstance(profit, (int, float))
+# Test profit for the category that doesn not exist and returns 0
 def test_profit_non_existent_category(self):
-
+    profit = calcualte_total_profit_by_category(self.test_data, "Electronics")
+    self.assertEqual(profit, 0)
+# test negative profits that are in the calculation 
 def test_profit_includes_negative(self):
+    profit = calcualte_total_profit_by_category(self.test_data, "Technology")
+    self.assertEqual(profit, 150.00)
 
-
-
-
+# Test all the calculations for the office supplies 
+def test_profit_calculation_office_supplies(self):
+    sales = calculate_total_sales_by_category(self.test_data, "Office Supplies")
+    self.assertEqual(sales, 250.00)
+# test all of the categories to get numeric value
+def test_sales_calculations_returns_number(self):
+    sales = calculate_total_sales_by_category(self.test_data, "Furniture")
+    self.assertIsInstance(sales, (int, float))
+    self.assertGreaterEqual(sales, 0)
+# Test profit for the category that doesn not exist and returns 0
+def test_sales_non_existent_category(self):
+    sales = calcualte_total_profit_by_category(self.test_data, "Toys")
+    self.assertEqual(sales, 0)
+# test negative profits that are in the calculation 
+def test_sales_includes_zero(self):
+    sales = calcualte_total_profit_by_category(self.test_data, "Office Suplies")
+    self.assertEqual(sales, 250.00)
     
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #I was able to pull succesfully my updates from the other laptop.
