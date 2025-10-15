@@ -100,6 +100,17 @@ def main():
 # call the functions for each of the category
 if __name__ == "__main__":
     main()
+
+# Creating the Test-Case
+class TestSuperstoreFunctions(unittest.TestCase):
+    def setUp(self):
+        #Will have the data load the test of the CSV file
+        self.test_data = csv_to_dict_list("test_superstore.csv")
+        #print(self.test_data)
+# Test for the CSV csv_to_dict_list 
+def test_csv_loads_valid_rows(self):
+
+
     
 #trying to pull this info I'm using two laptops since my laptop was at the tech shop. Doing a pull and see if it works.
 #I was able to pull succesfully my updates from the other laptop.
