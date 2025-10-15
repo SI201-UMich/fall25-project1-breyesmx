@@ -6,14 +6,18 @@
 
 
 import csv 
+import unittest
+import os 
 
 # ___read the file function___
 def csv_to_dict_list(filename):
+    base_path = os.path.dirname(os.path.abspath(__file__))
+    full_path = os.path.join(base_path, filename)
 
 # Empty list to have the data
     data_list = []
 # Step 1: I'm opening the file. / Update Indentions
-    with open(filename, 'r') as csvfile:
+    with open(full_path, 'r') as csvfile:
         superstores_reader = csv.DictReader(csvfile)
 
 #Step 2: Loop to get info from each row in the csv / Update indentions 
@@ -36,7 +40,7 @@ def calcualte_total_profit_by_category(data, category):
 # loop trough each row from the data. 
     for row in data:
 # Check the if the category is matches the category we are calling
-        if row.get["Category"] == category: #missing the .get AI debug this code 
+        if row.get("Category") == category: #missing the .get AI debug this code / parentheses instead of brackets
 # If it matches then we add to the total_profit 
             total_profit += row["Profit"]
     return total_profit
@@ -48,7 +52,7 @@ def calculate_total_sales_by_category(data, category):
 # Loop trough each row in the data.
     for row in data:
 #Again it checks the value in the row that matches the one we are calling. 
-        if row.get["Category"] == category: #missing .get AI debugg this code 
+        if row.get("Category") == category: #missing .get AI debugg this code / parentheses instead of brackets
 #if it matches then we add to the total_sales. 
             total_sales += row["Sales"]
     return total_sales
@@ -57,14 +61,15 @@ def calculate_total_sales_by_category(data, category):
 def write_results_to_file(filename, results_dict):
     with open(filename, 'w', newline='') as file: #error here AI debugg this missing comma 
         section_names = ['Category', 'Total Profit', 'Total Sales'] #debugging with AI wrong indention
-        writer = csv.DictReader(csvfile), fieldnames = section_names #debugging with AI wrong indention
+        writer = csv.DictWriter(file, fieldnames = section_names) #debugging with AI wrong indention, syntax error
         writer.writeheader() #debugging with AI wrong indention
+        writer.writerows(results_dict)
 
 # Main
 def main():
 #Using this read function #this would be in the main
     data = csv_to_dict_list("SampleSuperstore.csv")
-    print(f"Load {len(data)} rows from the file.")
+    print(f"Loaded {len(data)} rows from the file:")
  
 # get a list of the categories 
     categories = set(row["Category"] for row in data if "Category" in row)
@@ -72,12 +77,12 @@ def main():
 # loop trough each of the category and get it's total
     final_result = []
     for category in categories:
-    profit = calcualte_total_profit_by_category(data, category)
-    sales = calculate_total_sales_by_category(data, category)
+        profit = calcualte_total_profit_by_category(data, category) #debugged by AI indentions 
+        sales = calculate_total_sales_by_category(data, category) #debugged by AI indentions 
 
-# get the results in csv writer 
+# get the results in csv writer
     final_result.append({
-        "Category": category
+        "Category": category,
         "Total Profit": round(profit, 2),
         "Total Sales": round(sales, 2)
 
@@ -86,8 +91,8 @@ def main():
     print(final_result)
 
 # then final list to a new file 
-    output_file = "category_summary_alternative.csv"
-    write_results_to_file(out_file, final_result)
+    output_file = "category_summary.csv" 
+    write_results_to_file(output_file, final_result) #syntax error / variable name
     print(f'\nResults have been completed to written to {output_file}')
 # call the functions for each of the category
 if __name__ == "__main__":
