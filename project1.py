@@ -120,8 +120,16 @@ def test_csv_empty_file(self):
 
 # Test the calculate_total_profit_by_category
 
+# Test the profit calculation for all the furniture category: 
 def test_profit_calculation_furniture(self):
-    
+
+def test_profit_calculation_all_categories(self):
+
+def test_profit_non_existent_category(self):
+
+def test_profit_includes_negative(self):
+
+
 
 
     
