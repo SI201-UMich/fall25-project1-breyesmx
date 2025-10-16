@@ -6,7 +6,7 @@
     # Also got ideas for the unit test cases. During this project, I was able to create functions by using the debugging tools to resolve syntax errors and type errors 
 # }
 
-#PLEASE READ THIS SECTION: #LINK to video will be here if you're having any problems please let me know. 
+#PLEASE READ THIS SECTION: #LINK to video will be here if you're having any problems please let me know. COPY LINKL: https://www.loom.com/share/6a79448a4e8e463bba90aae014db70ab?sid=2b7a7a27-3c89-4f40-82fe-d2f935d9e424
 
 import csv 
 import unittest
