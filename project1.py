@@ -1,7 +1,11 @@
-# Project 1 - Due Oct  15th 
-# Brandon Reyes Parra 
+# Project 1: Due Oct  15th 
+# Name:  Brandon Reyes Parra 
 # UMID: 55887524
-# AI USage: I used AI assistatn for project structre gudidance, debugging (especially in indentions), and re-explaning some of the concepts that I forgot like try/except, and getting the ideas for the unitt test case. During this project I was able to create the functions with using the debugging of the syntax errors and typeerrors. 
+# AI USage: {
+    # Used an AI assistant for project structure guidance, debugging (especially with indentations), and re-explaining some of the concepts I had forgotten, such as try/except.
+    # Also got ideas for the unit test cases. During this project, I was able to create functions by using the debugging tools to resolve syntax errors and type errors 
+# }
+
 #PLEASE READ THIS SECTION: #LINK to video will be here if you're having any problems please let me know. 
 
 import csv 
@@ -33,25 +37,25 @@ def csv_to_dict_list(filename):
 # Step 4: we return the function / update indentions
 
 # ___Function number 2 get the total of the profit by category__
-def calcualte_total_profit_by_category(data, category):
+def calcualte_total_profit_by_category(data, category, subcategory):
 #created a a variable called total_profit to start at 0.
     total_profit = 0
 # loop trough each row from the data. 
     for row in data:
 # Check the if the category is matches the category we are calling
-        if row.get("Category") == category: #missing the .get AI debug this code / parentheses instead of brackets
+        if row.get("Category") == category and row.get("Sub-Category") == subcategory: #missing the .get AI debug this code / parentheses instead of brackets
 # If it matches then we add to the total_profit 
             total_profit += row["Profit"]
     return total_profit
 
 # Function 3: Get the total sales by category__
-def calculate_total_sales_by_subcategory(data, subcategory):
+def calculate_total_sales_by_subcategory(data, subcategory, min_profit=0):
 #created a varible called total_sales which start at 0.
     total_sales = 0
 # Loop trough each row in the data.
     for row in data:
 #Again it checks the value in the row that matches the one we are calling. 
-        if row.get("Sub-Category") == subcategory: #missing .get AI debugg this code / parentheses instead of brackets
+        if row.get("Sub-Category") == subcategory and row["Profit"] > min_profit: #missing .get AI debugg this code / parentheses instead of brackets
 #if it matches then we add to the total_sales. 
             total_sales += row["Sales"]
     return total_sales
@@ -77,25 +81,33 @@ def main():
 # get a list of the categories 
     categories = sorted(list(set(row["Category"] for row in data if "Category" in row)))
     print(F'Found categories: {list(categories)}')
+
+    subcategories = sorted(list(set(row["Sub-Category"] for row in data if "Sub-Category" in row)))
+    print(f'Selected: {len(subcategories)} sub-categories')
+
 # loop trough each of the calculation category 
     profit_final_result = []
     for category in categories:
-        profit = calcualte_total_profit_by_category(data, category) #debugged by AI indentions 
-
-        profit_final_result.append({
-            "Category": category,
-            "Total Profit": round(profit, 2),            
-        })
+        for subcategory in subcategories:
+            combine = any(row.get("Category") == category and row.get("Sub-catergory") == subcategory for row in data)
+            if combine:
+                profit = calcualte_total_profit_by_category(data, category, subcategory) #debugged by AI indentions 
+                if profit != 0:
+                    profit_final_result.append({
+                    "Category": category,
+                    "Sub-category": subcategory,
+                    "Total Profit": round(profit, 2),            
+                    })
 
     output_file_1 = "category_profits.csv"
     write_results_to_file(output_file_1, profit_final_result)
     print(F'Analysis Completed: {output_file_1}')
+
 # Loop trough each of the calculation by subcategory
-    subcategories = sorted(list(set(row["Sub-Category"] for row in data if "Sub-Category" in row)))
-    print(f'Selected: {len(subcategories)} sub-categories')
+    print(f' Selected: {len(subcategories)} sub-categories')
     total_sales_result = []
     for subcategory in subcategories:
-        sales = calculate_total_sales_by_subcategory(data, subcategory)
+        sales = calculate_total_sales_by_subcategory(data, subcategory, min_profit=0)
         total_sales_result.append({
             "Sub-Category": subcategory,
             "Total Sales": round(sales, 2)
@@ -114,6 +126,8 @@ class TestSuperstoreFunctions(unittest.TestCase):
             writer.writerow(["Category", "Sub-Category", "Profit", "Sales"])
             writer.writerow(["Office", "Paper", "10.00", "50.00"])
             writer.writerow(["Tech", "Phones", "10.00", "50.00"])
+            writer.writerow(["Office", "Binders", "5.00", "30.00"])
+        
         self.test_data = csv_to_dict_list(self.test_csv_file)
 
     def tearDown(self):
@@ -121,10 +135,10 @@ class TestSuperstoreFunctions(unittest.TestCase):
             os.remove(self.test_csv_file)
 
     def test_profit_calculation(self):
-        profit = calcualte_total_profit_by_category(self.test_data, "Tech")
-        self.assertEqual(profit, 80.00)
+        profit = calcualte_total_profit_by_category(self.test_data, "Tech", "Phones")
+        self.assertEqual(profit, 100.00)
     def test_sales_by_subcategory(self):
-        sales = calculate_total_sales_by_subcategory(self.test_data, "Paper")
+        sales = calculate_total_sales_by_subcategory(self.test_data, "Paper", min_profit=0)
         self.assertEqual(sales, 50.00)
     def test_write_empty_list(self):
         output_file = "test_empty.csv"
@@ -134,6 +148,12 @@ class TestSuperstoreFunctions(unittest.TestCase):
             self.assertEqual(content, '')
         if os.path.exists(output_file):
             os.remove(output_file)
+    def test_non_cobnications(self):
+        profit = calcualte_total_profit_by_category(self.test_data, "Furniture", "Chairs")
+        self.assertEqual(profit, 0.00)
+    def test_sales_with_profit(self):
+        profit = calculate_total_sales_by_subcategory(self.test_data, "Paper", min_profit=100)
+        self.assertEqual(profit, 0.00)
 
 if __name__ == "__main__":
     main()
